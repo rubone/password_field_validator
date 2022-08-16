@@ -1,6 +1,6 @@
 class Validator {
-  //Check  minLength
-  bool hasMinimunLength(String password, int minLength) {
+  //Check  minimum Length
+  bool hasMinimumLength(String password, int minLength) {
     return password.length >= minLength ? true : false;
   }
 

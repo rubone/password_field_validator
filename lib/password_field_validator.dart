@@ -42,7 +42,7 @@ class _PasswordFieldValidatorState extends State<PasswordFieldValidator> {
   late bool isFirstRun;
 
   void validate() {
-    _selectedCondition[Strings.atLeast] = Validator().hasMinimunLength(
+    _selectedCondition[Strings.atLeast] = Validator().hasMinimumLength(
       widget.controller.text,
       widget.minLength,
     );
