@@ -14,7 +14,7 @@ class ValidatorItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 5),
       child: Row(
         children: [
           Container(
@@ -32,9 +32,7 @@ class ValidatorItemWidget extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: 10,
             ),
-            child: Text(
-              text,
-            ),
+            child: Text('$text (${conditionValue.toString()})'),
           ),
         ],
       ),

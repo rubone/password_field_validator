@@ -4,14 +4,22 @@ import 'package:password_field_validator/validator/strings.dart';
 import 'package:password_field_validator/validator/validator.dart';
 
 class PasswordFieldValidator extends StatefulWidget {
-  final int minLength,
-      uppercaseCharCount,
-      lowercaseCharCount,
-      numericCharCount,
-      specialCharCount;
+  final int minLength;
+  final int uppercaseCharCount;
+  final int lowercaseCharCount;
+  final int numericCharCount;
+  final int specialCharCount;
 
-  final Color defaultColor, successColor, failureColor;
+  final Color defaultColor;
+  final Color successColor;
+  final Color failureColor;
   final TextEditingController controller;
+
+  final String? minLengthMessage;
+  final String? uppercaseCharMessage;
+  final String? lowercaseMessage;
+  final String? numericCharMessage;
+  final String? specialCharacterMessage;
 
   const PasswordFieldValidator(
       {Key? key,
@@ -23,7 +31,12 @@ class PasswordFieldValidator extends StatefulWidget {
       required this.defaultColor,
       required this.successColor,
       required this.failureColor,
-      required this.controller})
+      required this.controller,
+      this.minLengthMessage,
+      this.uppercaseCharMessage,
+      this.lowercaseMessage,
+      this.numericCharMessage,
+      this.specialCharacterMessage})
       : super(key: key);
 
   @override
@@ -31,45 +44,47 @@ class PasswordFieldValidator extends StatefulWidget {
 }
 
 class _PasswordFieldValidatorState extends State<PasswordFieldValidator> {
-  final Map<String, bool> _selectedCondition = {
-    Strings.atLeast: false,
-    Strings.uppercase: false,
-    Strings.lowercase: false,
-    Strings.numericCharacter: false,
-    Strings.specialCharacter: false,
+  final Map<Validation, bool> _selectedCondition = {
+    Validation.atLeast: false,
+    Validation.uppercase: false,
+    Validation.lowercase: false,
+    Validation.numericCharacter: false,
+    Validation.specialCharacter: false,
   };
 
   late bool isFirstRun;
 
   void validate() {
-    _selectedCondition[Strings.atLeast] = Validator().hasMinimumLength(
+    _selectedCondition[Validation.atLeast] = Validator().hasMinimumLength(
       widget.controller.text,
       widget.minLength,
     );
 
-    _selectedCondition[Strings.uppercase] = Validator().hasMinimumUppercase(
+    _selectedCondition[Validation.uppercase] = Validator().hasMinimumUppercase(
       widget.controller.text,
       widget.uppercaseCharCount,
     );
 
-    _selectedCondition[Strings.lowercase] = Validator().hasMinimumLowercase(
+    _selectedCondition[Validation.lowercase] = Validator().hasMinimumLowercase(
       widget.controller.text,
       widget.lowercaseCharCount,
     );
 
-    _selectedCondition[Strings.numericCharacter] =
+    _selectedCondition[Validation.numericCharacter] =
         Validator().hasMinimumNumericCharacters(
       widget.controller.text,
       widget.numericCharCount,
     );
 
-    _selectedCondition[Strings.specialCharacter] =
+    _selectedCondition[Validation.specialCharacter] =
         Validator().hasMinimumSpecialCharacters(
       widget.controller.text,
       widget.specialCharCount,
     );
 
-    setState(() => null);
+    setState(() {
+      return;
+    });
   }
 
   @override
@@ -77,7 +92,6 @@ class _PasswordFieldValidatorState extends State<PasswordFieldValidator> {
     super.initState();
     isFirstRun = true;
 
-    //Adds a listener callback on TextField
     widget.controller.addListener(() {
       isFirstRun = false;
       validate();
@@ -86,37 +100,63 @@ class _PasswordFieldValidatorState extends State<PasswordFieldValidator> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: _selectedCondition.entries.map((entry) {
-          int conditionValue = 0;
-          if (entry.key == Strings.atLeast) {
-            conditionValue = widget.minLength;
-          }
-          if (entry.key == Strings.uppercase) {
-            conditionValue = widget.uppercaseCharCount;
-          }
-          if (entry.key == Strings.lowercase) {
-            conditionValue = widget.numericCharCount;
-          }
-          if (entry.key == Strings.numericCharacter) {
-            conditionValue = widget.specialCharCount;
-          }
-          if (entry.key == Strings.specialCharacter) {
-            conditionValue = widget.specialCharCount;
-          }
-          return ValidatorItemWidget(
-            entry.key,
-            conditionValue,
-            isFirstRun
-                ? widget.defaultColor
-                : entry.value
-                    ? widget.successColor
-                    : widget.failureColor,
-            entry.value,
-          );
-        }).toList(),
-      ),
+    return Column(
+      children: _selectedCondition.entries.map((entry) {
+        int conditionValue = 0;
+        String conditionMessage = '';
+        if (entry.key == Validation.atLeast) {
+          conditionValue = widget.minLength;
+          conditionMessage = widget.minLengthMessage ??
+              validatorMessage.entries
+                  .firstWhere((element) => element.key == Validation.atLeast)
+                  .value
+                  .toString();
+        }
+        if (entry.key == Validation.uppercase) {
+          conditionValue = widget.uppercaseCharCount;
+          conditionMessage = widget.uppercaseCharMessage ??
+              validatorMessage.entries
+                  .firstWhere((element) => element.key == Validation.uppercase)
+                  .value
+                  .toString();
+        }
+        if (entry.key == Validation.lowercase) {
+          conditionValue = widget.lowercaseCharCount;
+          conditionMessage = widget.lowercaseMessage ??
+              validatorMessage.entries
+                  .firstWhere((element) => element.key == Validation.lowercase)
+                  .value
+                  .toString();
+        }
+        if (entry.key == Validation.numericCharacter) {
+          conditionValue = widget.numericCharCount;
+          conditionMessage = widget.numericCharMessage ??
+              validatorMessage.entries
+                  .firstWhere(
+                      (element) => element.key == Validation.numericCharacter)
+                  .value
+                  .toString();
+        }
+        if (entry.key == Validation.specialCharacter) {
+          conditionValue = widget.specialCharCount;
+          conditionMessage = widget.specialCharacterMessage ??
+              validatorMessage.entries
+                  .firstWhere(
+                      (element) => element.key == Validation.specialCharacter)
+                  .value
+                  .toString();
+        }
+        return ValidatorItemWidget(
+          conditionMessage,
+          conditionValue,
+          isFirstRun
+              ? widget.defaultColor
+              : entry.value
+                  ? widget.successColor
+                  : widget.failureColor,
+          entry.value,
+        );
+      }).toList(),
     );
   }
 }

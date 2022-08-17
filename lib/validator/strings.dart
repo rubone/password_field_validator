@@ -5,3 +5,19 @@ class Strings {
   static const numericCharacter = 'Numeric character';
   static const specialCharacter = 'Special character';
 }
+
+enum Validation {
+  atLeast,
+  uppercase,
+  lowercase,
+  numericCharacter,
+  specialCharacter
+}
+
+final Map<Validation, String> validatorMessage = {
+  Validation.atLeast: Strings.atLeast,
+  Validation.uppercase: Strings.uppercase,
+  Validation.lowercase: Strings.lowercase,
+  Validation.numericCharacter: Strings.numericCharacter,
+  Validation.specialCharacter: Strings.specialCharacter,
+};
