@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:password_field_validator/components/validator_item.dart';
-import 'package:password_field_validator/validator/strings.dart';
+import 'package:password_field_validator/validator/enum_valdation.dart';
+
 import 'package:password_field_validator/validator/validator.dart';
+import 'package:password_field_validator/validator/validator_message.dart';
 
 class PasswordFieldValidator extends StatefulWidget {
   final int minLength;
