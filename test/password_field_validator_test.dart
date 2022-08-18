@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:password_field_validator/validator/validator.dart';
 
@@ -119,5 +121,19 @@ void main() {
 
     // Assert
     expect(result, true);
+  });
+
+  test(
+      'Should return false when minimum numeric character is 2 and password has 1 numeric character ',
+      () {
+    // Arrange
+    String password = 'Example1';
+    int numericCount = 2;
+
+    // Act
+    bool result = validator.hasMinimumNumericCharacters(password, numericCount);
+
+    // Assert
+    expect(result, false);
   });
 }
