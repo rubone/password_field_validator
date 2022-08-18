@@ -35,4 +35,89 @@ void main() {
     // Assert
     expect(result, true);
   });
+
+  test(
+      'Should return false when minimum special charactes is 3 and password has 2 special characters',
+      () {
+    // Arrange
+    String password = 'demO^&';
+    int specialCharactersCount = 3;
+
+    // Act
+    bool result =
+        validator.hasMinimumSpecialCharacters(password, specialCharactersCount);
+
+    // Assert
+    expect(result, false);
+  });
+
+  test(
+      'Should return true when minimun uppercase is 2 and password has 3 uppercase letter',
+      () {
+    // Arrange
+    String password = 'ExampLE90';
+    int uppercaseCount = 2;
+
+    // Act
+    bool result = validator.hasMinimumUppercase(password, uppercaseCount);
+
+    // Assert
+    expect(result, true);
+  });
+
+  test(
+      'Should return false when minimum uppercase is 1 and password has 0 uppercase letter',
+      () {
+    // Arrange
+    String password = 'example12*';
+    int uppercaseCount = 1;
+
+    // Act
+    bool result = validator.hasMinimumUppercase(password, uppercaseCount);
+
+    // Assert
+    expect(result, false);
+  });
+
+  test(
+      'Should return true when minimum lowercase is 5 and password has 8 lowercase letter',
+      () {
+    // Arrange
+    String password = 'examples';
+    int lowercaseCount = 5;
+
+    // Act
+    bool result = validator.hasMinimumLowercase(password, lowercaseCount);
+
+    // Assert
+    expect(result, true);
+  });
+
+  test(
+      'Should return false when minimum lowercase is 5 and password has 4 lowercase letter',
+      () {
+    // Arrange
+    String password = 'exam*';
+    int lowercaseCount = 5;
+
+    // Act
+    bool result = validator.hasMinimumLowercase(password, lowercaseCount);
+
+    // Assert
+    expect(result, false);
+  });
+
+  test(
+      'Should return true when minimum numeric chracter is 2 and password has 2 numeric character',
+      () {
+    // Arrange
+    String password = 'example17';
+    int numericCount = 2;
+
+    // Act
+    bool result = validator.hasMinimumNumericCharacters(password, numericCount);
+
+    // Assert
+    expect(result, true);
+  });
 }
