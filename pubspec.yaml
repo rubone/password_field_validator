@@ -1,7 +1,7 @@
 name: password_field_validator
-description: A new Flutter package project.
+description: Password Field Validator help you to validate a passwords with your rules.
 version: 0.0.1
-homepage:
+homepage: https://github.com/rubone/password_field_validator
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
