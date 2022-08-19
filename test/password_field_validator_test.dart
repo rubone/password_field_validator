@@ -54,6 +54,21 @@ void main() {
   });
 
   test(
+      'Should return true when minimum special charcters is 2 and password has 3 special characters',
+      () {
+    // Arrange
+    String password = 'demo23&*#';
+    int specialCharactersCount = 2;
+
+    // Act
+    bool result =
+        validator.hasMinimumSpecialCharacters(password, specialCharactersCount);
+
+    // Assert
+    expect(result, true);
+  });
+
+  test(
       'Should return true when minimun uppercase is 2 and password has 3 uppercase letter',
       () {
     // Arrange
