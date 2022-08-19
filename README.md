@@ -11,6 +11,10 @@ Password Field Validator help you to validate a passwords with your rules.
 - `Numeric characters`
 - `Special characters`
 
+![Gif044](https://user-images.githubusercontent.com/1043247/185675524-5177a165-fa20-4352-919a-7724d1ea1f1d.gif)
+![Gif055](https://user-images.githubusercontent.com/1043247/185675593-cdc94103-91b8-48f6-a3fa-ca1ee66a479f.gif)
+
+
 ## Getting started
 
 ### 1. Add it to your package's pubspec.yaml file
