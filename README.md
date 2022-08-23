@@ -1,5 +1,8 @@
 # Password Field Validator
-[![License](https://img.shields.io/github/license/leisim/logger?logo=open-source-initiative&logoColor=green)](https://github.com/leisim/logger/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/leisim/logger?logo=open-source-initiative&logoColor=green)](https://github.com/rubone/password_field_validator/blob/master/LICENSE)
+![Pub Version](https://img.shields.io/pub/v/password_field_validator)
+![Code Size](https://img.shields.io/github/languages/code-size/rubone/password_field_validator)
+![GitHub stars](https://img.shields.io/github/stars/rubone/password_field_validator)
 
 Password Field Validator help you to validate a passwords with your rules.
 
