@@ -6,9 +6,10 @@ class ValidatorItemWidget extends StatelessWidget {
   final int conditionValue;
   final Color color;
   final bool value;
+  final Color? textColor;
 
   const ValidatorItemWidget(
-      this.text, this.conditionValue, this.color, this.value,
+      this.text, this.conditionValue, this.color, this.value, this.textColor,
       {Key? key})
       : super(key: key);
   @override
@@ -32,7 +33,15 @@ class ValidatorItemWidget extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: 10,
             ),
-            child: Text('$text (${conditionValue.toString()})'),
+            child: textColor == null ?
+            Text(
+              '$text (${conditionValue.toString()})',
+            ) : Text(
+              '$text (${conditionValue.toString()})',
+              style: TextStyle(
+                color: textColor
+              ),
+            ),
           ),
         ],
       ),

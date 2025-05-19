@@ -15,6 +15,7 @@ class PasswordFieldValidator extends StatefulWidget {
   final Color defaultColor;
   final Color successColor;
   final Color failureColor;
+  final Color? textColor;
   final TextEditingController controller;
 
   final String? minLengthMessage;
@@ -34,6 +35,7 @@ class PasswordFieldValidator extends StatefulWidget {
       required this.successColor,
       required this.failureColor,
       required this.controller,
+      this.textColor,
       this.minLengthMessage,
       this.uppercaseCharMessage,
       this.lowercaseMessage,
@@ -157,6 +159,7 @@ class _PasswordFieldValidatorState extends State<PasswordFieldValidator> {
                   ? widget.successColor
                   : widget.failureColor,
           entry.value,
+          widget.textColor
         );
       }).toList(),
     );
